@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+
+@theme {
+  --font-sans: 'Manrope', system-ui, sans-serif;
+
+  --color-page: #faf7f2;
+  --color-card: #ffffff;
+  --color-line: #e7e0d5;
+  --color-field: #d6cfc2;
+  --color-ink: #1c1917;
+  --color-body: #44403c;
+  --color-muted: #57534e;
+  --color-primary: #0f766e;
+  --color-primary-hover: #115e59;
+  --color-tint: #e6f4f1;
+  --color-busy: #78716c;
+  --color-track: #ece6da;
+  --color-sand: #f5f0e8;
+  --color-dark: #131209;
+  --color-danger: #b91c1c;
+  --color-danger-tint: #fef2f2;
+
+  --text-h1: 60px;
+  --text-h1--line-height: 60px;
+  --text-h2: 48px;
+  --text-h2--line-height: 48px;
+  --text-h3: 36px;
+  --text-h3--line-height: 40px;
+  --text-title: 20px;
+  --text-title--line-height: 28px;
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-small: 14px;
+  --text-small--line-height: 20px;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+  a,
+  button,
+  summary,
+  input,
+  select,
+  textarea {
+    outline-offset: 2px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Landing tagline: words light up as the section scrolls into view. */
+@keyframes tw-in {
+  from {
+    color: rgba(28, 25, 23, 0.3);
+  }
+  to {
+    color: #1c1917;
+  }
+}
+.tw {
+  color: var(--color-ink);
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tw {
+      color: rgba(28, 25, 23, 0.3);
+      animation: tw-in 1ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: cover var(--a) cover var(--b);
+    }
+  }
+}
+
+details[open] summary svg {
+  transform: rotate(180deg);
+}
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary svg {
+  transition: transform 500ms var(--ease-soft);
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.skeleton {
+  background: var(--color-track);
+  border-radius: 8px;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
