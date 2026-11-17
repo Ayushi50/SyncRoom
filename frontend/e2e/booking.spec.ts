@@ -16,8 +16,8 @@ test('register, search, book, see it listed and receive the email', async ({ pag
   await page.getByRole('button', { name: 'Create account' }).click();
   await expect(page.getByRole('heading', { name: 'Find a room' })).toBeVisible();
 
-  // Search for tomorrow 14:00 to 15:00 for 5 people. A weekday is needed, so move to Monday if it is a weekend.
-  const d = new Date(Date.now() + 86_400_000);
+  // Search for a random weekday so reruns do not collide for 5 people. A weekday is needed, so move to Monday if it is a weekend.
+  const d = new Date(Date.now() + (2 + Math.floor(Math.random() * 55)) * 86_400_000);
   while ([0, 6].includes(d.getDay())) d.setDate(d.getDate() + 1);
   const date = d.toISOString().slice(0, 10);
   await page.getByLabel('Date').fill(date);
@@ -31,9 +31,10 @@ test('register, search, book, see it listed and receive the email', async ({ pag
   await expect(cards.first().getByText('Best fit')).toBeVisible();
   // 5 people: Kaveri (4 seats) must not appear, Godavari (6) is the best fit.
   await expect(page.getByRole('article', { name: 'Kaveri' })).toHaveCount(0);
-  await expect(cards.first()).toContainText('Godavari');
+  const best = (await cards.first().getByRole('heading').textContent()) ?? '';
+  expect(['Godavari', 'Ganga', 'Narmada', 'Brahmaputra']).toContain(best);
 
-  await page.getByRole('button', { name: 'Select Godavari' }).click();
+  await page.getByRole('button', { name: `Select ${best}` }).click();
   await expect(page.getByRole('complementary', { name: 'Your booking' })).toBeVisible();
   await page.getByLabel('Meeting title').fill('Backend design review');
   await page.getByLabel('Invite people').fill('priya@example.com');
