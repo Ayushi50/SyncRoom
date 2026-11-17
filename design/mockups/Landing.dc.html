@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rooms landing page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0f766e}a:hover{color:#115e59}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #0f766e;outline-offset:2px}
+.btn{transition:background-color 300ms cubic-bezier(0.22,1,0.36,1),transform 300ms cubic-bezier(0.22,1,0.36,1)}
+.btn:hover{background:#115e59 !important}
+.btn:active{transform:scale(0.98)}
+.card{transition:transform 500ms cubic-bezier(0.22,1,0.36,1)}
+.card:hover{transform:translateY(-4px)}
+summary{list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] summary svg{transform:rotate(180deg)}
+summary svg{transition:transform 500ms cubic-bezier(0.22,1,0.36,1)}
+@keyframes tw-in{
+from{color:rgba(28,25,23,0.3)}
+to{color:#1c1917}
+}
+@supports (animation-timeline: view()){
+@media (prefers-reduced-motion: no-preference){
+.tw{color:rgba(28,25,23,0.3);animation:tw-in 1ms cubic-bezier(0.22,1,0.36,1) both;animation-timeline:view();animation-range:cover var(--a) cover var(--b)}
+}
+}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #1c1917; background: #faf7f2; min-height: 4600px">
+
+<!-- Floating nav -->
+<header style="padding: 16px 16px 0; display: flex; justify-content: center">
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px; padding: 8px 8px 8px 24px; background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(12px); border: 1px solid #e7e0d5; border-radius: 24px">
+<a href="Landing.dc.html" style="font-size: 18px; line-height: 28px; font-weight: 600; color: #0f766e; text-decoration: none">Rooms</a>
+<a href="#features" style="font-size: 14px; line-height: 20px; font-weight: 500; color: #44403c; text-decoration: none; display: flex; align-items: center; min-height: 44px">Features</a>
+<a href="#how" style="font-size: 14px; line-height: 20px; font-weight: 500; color: #44403c; text-decoration: none; display: flex; align-items: center; min-height: 44px">How it works</a>
+<a href="#faq" style="font-size: 14px; line-height: 20px; font-weight: 500; color: #44403c; text-decoration: none; display: flex; align-items: center; min-height: 44px">FAQ</a>
+<a class="btn" href="B-Finder.dc.html" style="display: flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 8px 12px; background: #0f766e; color: #ffffff; border-radius: 999px; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none">Find a room</a>
+</nav>
+</header>
+
+<main>
+
+<!-- Hero -->
+<section style="padding: 80px 24px 96px; display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center">
+<div style="font-size: 12px; line-height: 16px; font-weight: 600; color: #115e59; background: #e6f4f1; padding: 4px 12px; border-radius: 999px">Meeting room booking for offices</div>
+<h1 style="margin: 0; max-width: 680px; font-size: 60px; line-height: 60px; font-weight: 600; text-wrap: balance; background: linear-gradient(to right, #000000, #666666); -webkit-background-clip: text; background-clip: text; color: transparent">Find a free room<br>that fits your meeting</h1>
+<p style="margin: 0; max-width: 680px; font-size: 20px; line-height: 28px; font-weight: 500; color: #57534e; text-wrap: pretty">Tell Rooms the time, the headcount and what you need. You see only the rooms that are free and big enough, and your slot is held while you confirm.</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px">
+<a class="btn" href="B-Finder.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; box-sizing: border-box; padding: 8px 12px 8px 24px; background: #0f766e; color: #ffffff; border-radius: 12px; font-size: 18px; line-height: 28px; font-weight: 600; text-decoration: none">Find a room
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+</a>
+<div style="font-size: 14px; line-height: 20px; font-weight: 400; color: #57534e">Cancel or move a booking at any time.</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 24px; font-size: 14px; line-height: 20px; font-weight: 500; color: #44403c">
+<div style="display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>Double bookings blocked</div>
+<div style="display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>Slots held for 5 minutes</div>
+<div style="display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>Empty rooms released after 10 minutes</div>
+</div>
+
+<!-- Hero visual: product preview -->
+<div style="width: 100%; max-width: 1040px; box-sizing: border-box; margin-top: 32px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 24px; padding: 8px; text-align: left">
+<div style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 24px">
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch">
+<div style="flex: 1.4 1 140px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 8px; padding: 8px 12px"><div style="font-size: 12px; line-height: 16px; font-weight: 500; color: #57534e">Date</div><div style="font-size: 16px; line-height: 24px; font-weight: 600">Wed, 18 Nov</div></div>
+<div style="flex: 1 1 100px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 8px; padding: 8px 12px"><div style="font-size: 12px; line-height: 16px; font-weight: 500; color: #57534e">From</div><div style="font-size: 16px; line-height: 24px; font-weight: 600">10:00 AM</div></div>
+<div style="flex: 1 1 100px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 8px; padding: 8px 12px"><div style="font-size: 12px; line-height: 16px; font-weight: 500; color: #57534e">To</div><div style="font-size: 16px; line-height: 24px; font-weight: 600">11:00 AM</div></div>
+<div style="flex: 1 1 80px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 8px; padding: 8px 12px"><div style="font-size: 12px; line-height: 16px; font-weight: 500; color: #57534e">People</div><div style="font-size: 16px; line-height: 24px; font-weight: 600">6</div></div>
+<div style="flex: 0 0 auto; display: flex; align-items: center; padding: 8px 24px; background: #0f766e; color: #ffffff; border-radius: 8px; font-size: 16px; line-height: 24px; font-weight: 600">Search</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+
+<div style="background: #ffffff; border: 2px solid #0f766e; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px"><div><div style="font-size: 20px; line-height: 28px; font-weight: 500">Godavari</div><div style="font-size: 14px; line-height: 20px; font-weight: 400; color: #57534e">6 seats on floor 3</div></div><span style="font-size: 12px; line-height: 16px; font-weight: 600; color: #115e59; background: #e6f4f1; padding: 4px 8px; border-radius: 999px">Best fit</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 12px; line-height: 16px; font-weight: 500; color: #44403c; background: #f5f0e8; padding: 4px 8px; border-radius: 999px">Video call</span><span style="font-size: 12px; line-height: 16px; font-weight: 500; color: #44403c; background: #f5f0e8; padding: 4px 8px; border-radius: 999px">Whiteboard</span></div>
+<div style="position: relative; height: 8px; border-radius: 999px; background: #ece6da"><div style="position: absolute; left: 0%; width: 11%; top: 0; bottom: 0; background: #78716c; border-radius: 999px"></div><div style="position: absolute; left: 44%; width: 11%; top: 0; bottom: 0; background: #78716c; border-radius: 999px"></div><div style="position: absolute; left: 11%; width: 11%; top: -2px; bottom: -2px; border: 2px solid #0f766e; border-radius: 4px; box-sizing: border-box"></div></div>
+</div>
+
+<div style="background: #ffffff; border: 1px solid #e7e0d5; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div><div style="font-size: 20px; line-height: 28px; font-weight: 500">Ganga</div><div style="font-size: 14px; line-height: 20px; font-weight: 400; color: #57534e">8 seats on floor 2</div></div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 12px; line-height: 16px; font-weight: 500; color: #44403c; background: #f5f0e8; padding: 4px 8px; border-radius: 999px">Video call</span><span style="font-size: 12px; line-height: 16px; font-weight: 500; color: #44403c; background: #f5f0e8; padding: 4px 8px; border-radius: 999px">Projector</span></div>
+<div style="position: relative; height: 8px; border-radius: 999px; background: #ece6da"><div style="position: absolute; left: 22%; width: 17%; top: 0; bottom: 0; background: #78716c; border-radius: 999px"></div><div style="position: absolute; left: 55%; width: 17%; top: 0; bottom: 0; background: #78716c; border-radius: 999px"></div><div style="position: absolute; left: 11%; width: 11%; top: -2px; bottom: -2px; border: 2px solid #0f766e; border-radius: 4px; box-sizing: border-box"></div></div>
+</div>
+
+<div style="background: #ffffff; border: 1px solid #e7e0d5; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div><div style="font-size: 20px; line-height: 28px; font-weight: 500">Narmada</div><div style="font-size: 14px; line-height: 20px; font-weight: 400; color: #57534e">12 seats on floor 1</div></div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 12px; line-height: 16px; font-weight: 500; color: #44403c; background: #f5f0e8; padding: 4px 8px; border-radius: 999px">Video call</span><span style="font-size: 12px; line-height: 16px; font-weight: 500; color: #44403c; background: #f5f0e8; padding: 4px 8px; border-radius: 999px">Accessible</span></div>
+<div style="position: relative; height: 8px; border-radius: 999px; background: #ece6da"><div style="position: absolute; left: 77%; width: 22%; top: 0; bottom: 0; background: #78716c; border-radius: 999px"></div><div style="position: absolute; left: 11%; width: 11%; top: -2px; bottom: -2px; border: 2px solid #0f766e; border-radius: 4px; box-sizing: border-box"></div></div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<!-- Benefits -->
+<section id="features" style="background: #ffffff; border-top: 1px solid #e7e0d5; border-bottom: 1px solid #e7e0d5; padding: 96px 24px">
+<div style="max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 680px">
+<div style="font-size: 12px; line-height: 16px; font-weight: 600; color: #0f766e">Features</div>
+<h2 style="margin: 0; font-size: 36px; line-height: 40px; font-weight: 600; text-wrap: balance">Booking that respects how meetings really work</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px">
+
+<div class="card" style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: #e6f4f1; border-radius: 12px">
+<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6"/><path d="M18 14.3c2 .7 3.5 2.4 3.5 5.2"/></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">Only rooms that fit</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Filter by date, time, headcount and equipment. A room for eight never shows up for a meeting of twelve.</p>
+</div>
+
+<div class="card" style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: #e6f4f1; border-radius: 12px">
+<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.5-3 8-7.5 9.5-4.5-1.5-7.5-5-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">No double bookings</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Two people cannot take the same slot. The second person sees it is gone before they confirm, and gets the next free options.</p>
+</div>
+
+<div class="card" style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: #e6f4f1; border-radius: 12px">
+<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l3 3-3 3"/><path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H20"/><path d="M7 21l-3-3 3-3"/><path d="M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H4"/></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">Repeating meetings that behave</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Book every Monday for eight weeks, then change one date or the whole series without breaking the rest.</p>
+</div>
+
+<div class="card" style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: #e6f4f1; border-radius: 12px">
+<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2.5h6"/></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">Rooms that free themselves</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">If nobody checks in within 10 minutes, the room goes back to the pool and the waitlist gets the first turn.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Tagline reveal -->
+<section style="padding: 96px 24px">
+<div style="max-width: 680px; margin: 0 auto">
+<p style="margin: 0; font-size: 36px; line-height: 40px; font-weight: 600; text-wrap: balance"><span class="tw" style="--a:10%;--b:35%">Every</span> <span class="tw" style="--a:12%;--b:37%">meeting</span> <span class="tw" style="--a:14%;--b:39%">gets</span> <span class="tw" style="--a:16%;--b:41%">a</span> <span class="tw" style="--a:18%;--b:43%">room</span> <span class="tw" style="--a:20%;--b:45%">that</span> <span class="tw" style="--a:22%;--b:47%">fits.</span> <span class="tw" style="--a:24%;--b:49%">Every</span> <span class="tw" style="--a:26%;--b:51%">empty</span> <span class="tw" style="--a:28%;--b:53%">booking</span> <span class="tw" style="--a:30%;--b:55%">gets</span> <span class="tw" style="--a:32%;--b:57%">released.</span> <span class="tw" style="--a:34%;--b:59%">Nobody</span> <span class="tw" style="--a:36%;--b:61%">argues</span> <span class="tw" style="--a:38%;--b:63%">about</span> <span class="tw" style="--a:40%;--b:65%">who</span> <span class="tw" style="--a:42%;--b:67%">had</span> <span class="tw" style="--a:44%;--b:69%">it</span> <span class="tw" style="--a:46%;--b:71%">first.</span></p>
+</div>
+</section>
+
+<!-- How it works -->
+<section id="how" style="background: #ffffff; border-top: 1px solid #e7e0d5; border-bottom: 1px solid #e7e0d5; padding: 96px 24px">
+<div style="max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 680px">
+<div style="font-size: 12px; line-height: 16px; font-weight: 600; color: #0f766e">How it works</div>
+<h2 style="margin: 0; font-size: 36px; line-height: 40px; font-weight: 600; text-wrap: balance">Three steps from empty calendar to confirmed room</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #0f766e; color: #ffffff; border-radius: 999px; font-size: 16px; line-height: 24px; font-weight: 600">1</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">Search</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Pick the date, time and number of people. Add equipment such as a projector or video call.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #0f766e; color: #ffffff; border-radius: 999px; font-size: 16px; line-height: 24px; font-weight: 600">2</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">Choose</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Compare the rooms that are free. Each one shows its whole day at a glance, so you can see what is around your slot.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #0f766e; color: #ffffff; border-radius: 999px; font-size: 16px; line-height: 24px; font-weight: 600">3</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 600">Confirm</h3>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Add a title and invite your team. Everyone gets the room, the time and a reminder by email.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- For admins -->
+<section style="padding: 96px 24px">
+<div style="max-width: 1040px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 12px; line-height: 16px; font-weight: 600; color: #0f766e">For office admins</div>
+<h2 style="margin: 0; font-size: 36px; line-height: 40px; font-weight: 600; text-wrap: balance">Built for the people who run the building too</h2>
+<p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Set the rules once and let the booking page enforce them, so nobody has to police the calendar.</p>
+</div>
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: flex-start; gap: 12px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 12px; padding: 16px"><svg aria-hidden="true" style="flex: 0 0 auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><div style="font-size: 16px; line-height: 24px; font-weight: 500">Add rooms with seats and equipment in a few fields</div></div>
+<div style="display: flex; align-items: flex-start; gap: 12px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 12px; padding: 16px"><svg aria-hidden="true" style="flex: 0 0 auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><div style="font-size: 16px; line-height: 24px; font-weight: 500">Limit booking hours and rooms by team</div></div>
+<div style="display: flex; align-items: flex-start; gap: 12px; background: #ffffff; border: 1px solid #e7e0d5; border-radius: 12px; padding: 16px"><svg aria-hidden="true" style="flex: 0 0 auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><div style="font-size: 16px; line-height: 24px; font-weight: 500">See which rooms sit empty and which are always full</div></div>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: #ffffff; border-top: 1px solid #e7e0d5; border-bottom: 1px solid #e7e0d5; padding: 96px 24px">
+<div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 12px; line-height: 16px; font-weight: 600; color: #0f766e">FAQ</div>
+<h2 style="margin: 0; font-size: 36px; line-height: 40px; font-weight: 600; text-wrap: balance">Questions people ask first</h2>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+
+<details style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 12px; padding: 0 16px">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; cursor: pointer; font-size: 18px; line-height: 28px; font-weight: 500">What stops two people booking the same room?<svg aria-hidden="true" style="flex: 0 0 auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44403c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+<p style="margin: 0; padding: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">The system checks the time range at the moment you confirm and blocks any overlap. If someone else got there first, you are shown the next free options instead.</p>
+</details>
+
+<details style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 12px; padding: 0 16px">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; cursor: pointer; font-size: 18px; line-height: 28px; font-weight: 500">Can I book a meeting that repeats?<svg aria-hidden="true" style="flex: 0 0 auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44403c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+<p style="margin: 0; padding: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Yes. Choose daily, weekly or a custom pattern. Later you can change a single meeting or the whole series.</p>
+</details>
+
+<details style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 12px; padding: 0 16px">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; cursor: pointer; font-size: 18px; line-height: 28px; font-weight: 500">What happens if nobody turns up?<svg aria-hidden="true" style="flex: 0 0 auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44403c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+<p style="margin: 0; padding: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Ten minutes after the start time, an unchecked booking is released so the next person or the waitlist can use the room.</p>
+</details>
+
+<details style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 12px; padding: 0 16px">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; cursor: pointer; font-size: 18px; line-height: 28px; font-weight: 500">How long is my slot held while I book?<svg aria-hidden="true" style="flex: 0 0 auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44403c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+<p style="margin: 0; padding: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Five minutes. If you do not confirm in that time, the slot goes back to everyone.</p>
+</details>
+
+<details style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 12px; padding: 0 16px">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; cursor: pointer; font-size: 18px; line-height: 28px; font-weight: 500">Can I limit who books which room?<svg aria-hidden="true" style="flex: 0 0 auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44403c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+<p style="margin: 0; padding: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Admins can restrict a room by team and by hours. For example, the boardroom can be kept for leadership meetings on Mondays.</p>
+</details>
+
+<details style="background: #faf7f2; border: 1px solid #e7e0d5; border-radius: 12px; padding: 0 16px">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; cursor: pointer; font-size: 18px; line-height: 28px; font-weight: 500">Does it work on a phone?<svg aria-hidden="true" style="flex: 0 0 auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44403c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+<p style="margin: 0; padding: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 400; color: #57534e; text-wrap: pretty">Yes. The search and booking screens are laid out for small screens as well as desktops.</p>
+</details>
+
+</div>
+</div>
+</section>
+
+<!-- Final CTA -->
+<section style="background: #131209; padding: 96px 24px; text-align: center">
+<div style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px">
+<h2 style="margin: 0; font-size: 48px; line-height: 48px; font-weight: 600; color: #ffffff; text-wrap: balance">Stop hunting for rooms</h2>
+<p style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 500; color: #d6d3d1; text-wrap: pretty">Find a free room that fits your meeting in a few clicks. Cancel or move it whenever plans change.</p>
+<a class="btn" href="B-Finder.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; box-sizing: border-box; padding: 8px 12px 8px 24px; background: #0f766e; color: #ffffff; border-radius: 12px; font-size: 18px; line-height: 28px; font-weight: 600; text-decoration: none">Find a room
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+</a>
+</div>
+</section>
+
+</main>
+
+<footer style="background: #131209; border-top: 1px solid #313131; padding: 32px 24px">
+<div style="max-width: 1040px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<div style="font-size: 14px; line-height: 20px; font-weight: 500; color: #d6d3d1">Rooms · Meeting room booking</div>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 24px">
+<a href="#" style="display: flex; align-items: center; min-height: 44px; font-size: 14px; line-height: 20px; font-weight: 500; color: #d6d3d1; text-decoration: none">Privacy policy</a>
+<a href="#" style="display: flex; align-items: center; min-height: 44px; font-size: 14px; line-height: 20px; font-weight: 500; color: #d6d3d1; text-decoration: none">Terms</a>
+<a href="#" style="display: flex; align-items: center; min-height: 44px; font-size: 14px; line-height: 20px; font-weight: 500; color: #d6d3d1; text-decoration: none">Contact</a>
+</nav>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":4600}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

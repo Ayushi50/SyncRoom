@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/rooms_test}
+  mail:
+    host: localhost
+    port: 3025
+rooms:
+  seed: false

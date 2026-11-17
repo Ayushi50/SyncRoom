@@ -1,0 +1,17 @@
+[(${heading})]
+
+[(${p.title})]
+[(${when})]
+
+Room: [(${p.roomName})], floor [(${p.floor})]
+Seats: [(${p.capacity})]
+[# th:if="${!p.equipment.isEmpty()}"]Equipment: [(${equipment})]
+[/]Organizer: [(${p.organizerName})]
+[# th:if="${!p.invitees.isEmpty()}"]Invitees: [# th:each="i,s : ${p.invitees}"][(${i.email})][# th:unless="${s.last}"], [/][/]
+[/][# th:if="${p.autoRelease and type != 'BOOKING_CANCELLED' and type != 'BOOKING_RELEASED'}"]
+This room is released if nobody checks in within 10 minutes of the start time.
+[/]
+View booking: [(${viewUrl})]
+[# th:if="${type != 'BOOKING_CANCELLED' and type != 'BOOKING_RELEASED'}"]Reschedule: [(${rescheduleUrl})]
+Cancel: [(${cancelUrl})]
+[/]

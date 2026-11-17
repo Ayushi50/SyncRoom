@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title th:text="${heading}">Booking</title></head>
+<body style="margin:0;padding:0;background:#faf7f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1c1917;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f2;">
+<tr><td align="center" style="padding:32px 16px;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;">
+<tr><td style="background:#ffffff;border:1px solid #e7e0d5;border-radius:16px;padding:32px;">
+  <p style="margin:0 0 8px 0;font-size:14px;line-height:20px;color:#57534e;" th:text="'Hi ' + ${p.recipientName} + ','">Hi,</p>
+  <h1 style="margin:0 0 16px 0;font-size:24px;line-height:32px;font-weight:600;color:#1c1917;" th:text="${heading}">Heading</h1>
+  <p style="margin:0 0 4px 0;font-size:20px;line-height:28px;font-weight:600;" th:text="${p.title}">Title</p>
+  <p style="margin:0 0 24px 0;font-size:16px;line-height:24px;color:#57534e;" th:text="${when}">When</p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;line-height:20px;border-top:1px solid #e7e0d5;">
+    <tr><td style="padding:12px 0;color:#57534e;width:120px;">Room</td><td style="padding:12px 0;" th:text="${p.roomName} + ', floor ' + ${p.floor}">Room</td></tr>
+    <tr><td style="padding:12px 0;color:#57534e;border-top:1px solid #e7e0d5;">Seats</td><td style="padding:12px 0;border-top:1px solid #e7e0d5;" th:text="${p.capacity}">4</td></tr>
+    <tr th:if="${!p.equipment.isEmpty()}"><td style="padding:12px 0;color:#57534e;border-top:1px solid #e7e0d5;">Equipment</td><td style="padding:12px 0;border-top:1px solid #e7e0d5;" th:text="${equipment}">Projector</td></tr>
+    <tr><td style="padding:12px 0;color:#57534e;border-top:1px solid #e7e0d5;">Organizer</td><td style="padding:12px 0;border-top:1px solid #e7e0d5;" th:text="${p.organizerName}">Name</td></tr>
+    <tr th:if="${!p.invitees.isEmpty()}"><td style="padding:12px 0;color:#57534e;border-top:1px solid #e7e0d5;vertical-align:top;">Invitees</td><td style="padding:12px 0;border-top:1px solid #e7e0d5;"><span th:each="i,s : ${p.invitees}" th:text="${(i.name != null and !i.name.isBlank() ? i.name + ' ' : '') + i.email} + (${s.last} ? '' : ', ')">a@b.c</span></td></tr>
+  </table>
+  <p th:if="${p.autoRelease and type != 'BOOKING_CANCELLED' and type != 'BOOKING_RELEASED'}" style="margin:16px 0 0 0;font-size:14px;line-height:20px;color:#57534e;">This room is released if nobody checks in within 10 minutes of the start time.</p>
+  <p th:if="${type == 'BOOKING_RELEASED'}" style="margin:16px 0 0 0;font-size:14px;line-height:20px;color:#57534e;">Nobody checked in within 10 minutes of the start time, so the room is free for others.</p>
+  <p style="margin:24px 0 0 0;"><a th:href="${viewUrl}" href="#" style="display:inline-block;background:#0f766e;color:#ffffff;text-decoration:none;font-size:16px;line-height:24px;font-weight:600;padding:12px 24px;border-radius:8px;">View booking</a></p>
+  <p th:if="${type != 'BOOKING_CANCELLED' and type != 'BOOKING_RELEASED'}" style="margin:24px 0 0 0;font-size:14px;line-height:20px;color:#57534e;">Need a change? <a th:href="${rescheduleUrl}" href="#" style="color:#0f766e;">Reschedule</a> or <a th:href="${cancelUrl}" href="#" style="color:#0f766e;">cancel</a> this booking.</p>
+</td></tr>
+<tr><td style="padding:16px 8px;font-size:12px;line-height:16px;color:#57534e;text-align:center;">Sent by Rooms. A calendar invite is attached.</td></tr>
+</table>
+</td></tr></table>
+</body></html>
