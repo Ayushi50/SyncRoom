@@ -14,7 +14,8 @@ public final class BookingDtos {
     FOLLOWING
   }
 
-  public record AttendeeInput(@NotBlank @Email @Size(max = 254) String email, @Size(max = 120) String name) {}
+  public record AttendeeInput(
+      @NotBlank @Email @Size(max = 254) String email, @Size(max = 120) String name) {}
 
   public record Repeat(@NotNull SeriesPattern pattern, @Min(1) @Max(12) int count) {}
 
@@ -31,9 +32,11 @@ public final class BookingDtos {
   public record UpdateBookingRequest(
       Instant startsAt, Instant endsAt, @Size(max = 200) String title, Scope scope, Long version) {}
 
-  public record HoldRequest(@NotNull UUID roomId, @NotNull Instant startsAt, @NotNull Instant endsAt) {}
+  public record HoldRequest(
+      @NotNull UUID roomId, @NotNull Instant startsAt, @NotNull Instant endsAt) {}
 
-  public record HoldView(UUID id, UUID roomId, Instant startsAt, Instant endsAt, Instant expiresAt) {}
+  public record HoldView(
+      UUID id, UUID roomId, Instant startsAt, Instant endsAt, Instant expiresAt) {}
 
   public record Person(String name, String email) {}
 

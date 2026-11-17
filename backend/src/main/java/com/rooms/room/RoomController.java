@@ -22,7 +22,10 @@ public class RoomController {
 
   @GetMapping
   public List<RoomView> list(@RequestParam(defaultValue = "false") boolean includeInactive) {
-    var list = includeInactive ? rooms.findAll(org.springframework.data.domain.Sort.by("name")) : rooms.findByActiveTrueOrderByNameAsc();
+    var list =
+        includeInactive
+            ? rooms.findAll(org.springframework.data.domain.Sort.by("name"))
+            : rooms.findByActiveTrueOrderByNameAsc();
     return list.stream().map(RoomView::of).toList();
   }
 

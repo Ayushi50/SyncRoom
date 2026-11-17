@@ -42,7 +42,8 @@ public class Room {
     this.name = name;
     this.floor = floor;
     this.capacity = capacity;
-    this.amenities = amenities.isEmpty() ? EnumSet.noneOf(Amenity.class) : EnumSet.copyOf(amenities);
+    this.amenities =
+        amenities.isEmpty() ? EnumSet.noneOf(Amenity.class) : EnumSet.copyOf(amenities);
     this.openTime = open;
     this.closeTime = close;
     this.checkInRequired = checkInRequired;

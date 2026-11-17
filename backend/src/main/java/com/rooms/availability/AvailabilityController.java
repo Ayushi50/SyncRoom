@@ -33,7 +33,9 @@ public class AvailabilityController {
         start,
         end,
         Math.max(1, people),
-        amenities == null || amenities.isEmpty() ? EnumSet.noneOf(Amenity.class) : EnumSet.copyOf(amenities),
+        amenities == null || amenities.isEmpty()
+            ? EnumSet.noneOf(Amenity.class)
+            : EnumSet.copyOf(amenities),
         user.id());
   }
 }

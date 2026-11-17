@@ -80,8 +80,11 @@ public class BookingService {
             holds.flush();
             ensureFree(room, List.of(new Slot(r.startsAt(), r.endsAt())), u.id(), 1);
             SlotHold h =
-                holds.save(new SlotHold(room.getId(), u.id(), r.startsAt(), r.endsAt(), now.plus(HOLD_TTL)));
-            return new HoldView(h.getId(), h.getRoomId(), h.getStartsAt(), h.getEndsAt(), h.getExpiresAt());
+                holds.save(
+                    new SlotHold(
+                        room.getId(), u.id(), r.startsAt(), r.endsAt(), now.plus(HOLD_TTL)));
+            return new HoldView(
+                h.getId(), h.getRoomId(), h.getStartsAt(), h.getEndsAt(), h.getExpiresAt());
           });
     } catch (DataIntegrityViolationException e) {
       throw overlap(r.startsAt(), r.endsAt(), 1, u.id(), List.of(r.startsAt()));
@@ -90,11 +93,7 @@ public class BookingService {
 
   public void deleteHold(AuthUser u, UUID id) {
     tx.executeWithoutResult(
-        s ->
-            holds
-                .findById(id)
-                .filter(h -> h.getUserId().equals(u.id()))
-                .ifPresent(holds::delete));
+        s -> holds.findById(id).filter(h -> h.getUserId().equals(u.id())).ifPresent(holds::delete));
   }
 
   public int purgeExpiredHolds() {
@@ -111,7 +110,8 @@ public class BookingService {
       List<UUID> ids = tx.execute(s -> doCreate(u, r, slots, people));
       return ids.stream().map(id -> view(bookings.findById(id).orElseThrow())).toList();
     } catch (DataIntegrityViolationException e) {
-      throw overlap(r.startsAt(), r.endsAt(), people, u.id(), slots.stream().map(Slot::start).toList());
+      throw overlap(
+          r.startsAt(), r.endsAt(), people, u.id(), slots.stream().map(Slot::start).toList());
     }
   }
 
@@ -120,7 +120,10 @@ public class BookingService {
     if (!room.isActive()) throw ApiException.badRequest("This room is no longer available.");
     if (people > room.getCapacity()) {
       throw ApiException.badRequest(
-          room.getName() + " seats " + room.getCapacity() + ". Pick a larger room or fewer people.");
+          room.getName()
+              + " seats "
+              + room.getCapacity()
+              + ". Pick a larger room or fewer people.");
     }
     Instant now = clock.instant();
     for (Slot s : slots) {
@@ -153,7 +156,8 @@ public class BookingService {
     List<UUID> created = new ArrayList<>();
     for (int i = 0; i < slots.size(); i++) {
       Slot s = slots.get(i);
-      Booking draft = new Booking(room.getId(), u.id(), r.title().trim(), s.start(), s.end(), seriesId);
+      Booking draft =
+          new Booking(room.getId(), u.id(), r.title().trim(), s.start(), s.end(), seriesId);
       draft.getAttendees().addAll(attendees(r, organizer));
       Booking b = bookings.saveAndFlush(draft);
       created.add(b.getId());
@@ -168,7 +172,8 @@ public class BookingService {
       for (AttendeeInput a : r.attendees()) {
         String email = a.email().trim().toLowerCase();
         if (!email.equalsIgnoreCase(organizer.getEmail())) {
-          out.putIfAbsent(email, new BookingAttendee(email, a.name() == null ? null : a.name().trim()));
+          out.putIfAbsent(
+              email, new BookingAttendee(email, a.name() == null ? null : a.name().trim()));
         }
       }
     }
@@ -178,7 +183,8 @@ public class BookingService {
   private int people(CreateBookingRequest r) {
     int invited = 1;
     if (r.attendees() != null) {
-      invited += (int) r.attendees().stream().map(a -> a.email().trim().toLowerCase()).distinct().count();
+      invited +=
+          (int) r.attendees().stream().map(a -> a.email().trim().toLowerCase()).distinct().count();
     }
     return Math.max(invited, r.people() == null ? 1 : r.people());
   }
@@ -207,7 +213,8 @@ public class BookingService {
           do {
             cs = cs.plusDays(1);
             ce = ce.plusDays(1);
-          } while (cs.getDayOfWeek() == DayOfWeek.SATURDAY || cs.getDayOfWeek() == DayOfWeek.SUNDAY);
+          } while (cs.getDayOfWeek() == DayOfWeek.SATURDAY
+              || cs.getDayOfWeek() == DayOfWeek.SUNDAY);
         }
       }
       out.add(new Slot(cs.toInstant(), ce.toInstant()));
@@ -237,7 +244,8 @@ public class BookingService {
     }
   }
 
-  private ApiException overlap(Instant start, Instant end, int people, UUID userId, List<Instant> conflicts) {
+  private ApiException overlap(
+      Instant start, Instant end, int people, UUID userId, List<Instant> conflicts) {
     Instant from = conflicts.isEmpty() ? start : conflicts.get(0);
     Instant to = from.plus(Duration.between(start, end));
     List<AvailabilityService.Suggestion> alts = List.of();
@@ -298,7 +306,9 @@ public class BookingService {
       return view(bookings.findById(out).orElseThrow());
     } catch (DataIntegrityViolationException e) {
       throw ApiException.conflict(
-          "Time slot taken", "This room is already booked for that time. Pick another time.", Map.of());
+          "Time slot taken",
+          "This room is already booked for that time. Pick another time.",
+          Map.of());
     }
   }
 
@@ -310,7 +320,9 @@ public class BookingService {
     }
     if (r.version() != null && r.version() != b.getVersion()) {
       throw ApiException.conflict(
-          "Stale update", "This booking was changed by someone else. Reload it and try again.", Map.of());
+          "Stale update",
+          "This booking was changed by someone else. Reload it and try again.",
+          Map.of());
     }
     Room room = lockRoom(b.getRoomId());
     Instant newStart = r.startsAt() == null ? b.getStartsAt() : r.startsAt();
@@ -321,7 +333,8 @@ public class BookingService {
     List<Booking> targets =
         following ? bookings.seriesFrom(b.getSeriesId(), b.getStartsAt()) : List.of(b);
 
-    boolean timeChanged = !shiftStart.isZero() || !length.equals(Duration.between(b.getStartsAt(), b.getEndsAt()));
+    boolean timeChanged =
+        !shiftStart.isZero() || !length.equals(Duration.between(b.getStartsAt(), b.getEndsAt()));
     Instant now = clock.instant();
     List<Slot> slots = new ArrayList<>();
     if (timeChanged) {
@@ -374,12 +387,15 @@ public class BookingService {
     return tx.execute(
         s -> {
           Booking b = bookings.findById(id).orElseThrow(() -> ApiException.notFound("Booking"));
-          if (!b.getOrganizerId().equals(u.id())) throw ApiException.forbidden("Only the organizer can check in.");
+          if (!b.getOrganizerId().equals(u.id()))
+            throw ApiException.forbidden("Only the organizer can check in.");
           Instant now = clock.instant();
           if (b.getStatus() != BookingStatus.CONFIRMED) {
-            throw ApiException.conflict("Not active", "This booking is no longer active.", Map.of());
+            throw ApiException.conflict(
+                "Not active", "This booking is no longer active.", Map.of());
           }
-          if (now.isBefore(b.getStartsAt().minus(Duration.ofMinutes(15))) || now.isAfter(b.getEndsAt())) {
+          if (now.isBefore(b.getStartsAt().minus(Duration.ofMinutes(15)))
+              || now.isAfter(b.getEndsAt())) {
             throw new ApiException(
                 HttpStatus.CONFLICT,
                 "Check in closed",
@@ -440,18 +456,32 @@ public class BookingService {
   public List<BookingView> views(List<Booking> list) {
     if (list.isEmpty()) return List.of();
     Map<UUID, Room> roomMap =
-        rooms.findAllById(list.stream().map(Booking::getRoomId).collect(Collectors.toSet())).stream()
+        rooms
+            .findAllById(list.stream().map(Booking::getRoomId).collect(Collectors.toSet()))
+            .stream()
             .collect(Collectors.toMap(Room::getId, Function.identity()));
     Map<UUID, User> userMap =
-        users.findAllById(list.stream().map(Booking::getOrganizerId).collect(Collectors.toSet())).stream()
+        users
+            .findAllById(list.stream().map(Booking::getOrganizerId).collect(Collectors.toSet()))
+            .stream()
             .collect(Collectors.toMap(User::getId, Function.identity()));
     Map<UUID, BookingSeries> seriesMap =
         seriesRepo
-            .findAllById(list.stream().map(Booking::getSeriesId).filter(java.util.Objects::nonNull).collect(Collectors.toSet()))
+            .findAllById(
+                list.stream()
+                    .map(Booking::getSeriesId)
+                    .filter(java.util.Objects::nonNull)
+                    .collect(Collectors.toSet()))
             .stream()
             .collect(Collectors.toMap(BookingSeries::getId, Function.identity()));
     return list.stream()
-        .map(b -> toView(b, roomMap.get(b.getRoomId()), userMap.get(b.getOrganizerId()), seriesMap.get(b.getSeriesId())))
+        .map(
+            b ->
+                toView(
+                    b,
+                    roomMap.get(b.getRoomId()),
+                    userMap.get(b.getOrganizerId()),
+                    seriesMap.get(b.getSeriesId())))
         .toList();
   }
 

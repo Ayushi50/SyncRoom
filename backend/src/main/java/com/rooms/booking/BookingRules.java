@@ -16,8 +16,10 @@ public final class BookingRules {
   private BookingRules() {}
 
   public static void validateWindow(Instant start, Instant end, Instant now) {
-    if (start == null || end == null) throw ApiException.badRequest("Start and end times are required.");
-    if (!end.isAfter(start)) throw ApiException.badRequest("The end time must be after the start time.");
+    if (start == null || end == null)
+      throw ApiException.badRequest("Start and end times are required.");
+    if (!end.isAfter(start))
+      throw ApiException.badRequest("The end time must be after the start time.");
     Duration d = Duration.between(start, end);
     if (d.compareTo(MIN) < 0 || d.compareTo(MAX) > 0) {
       throw ApiException.badRequest("A booking must last between 15 minutes and 8 hours.");
@@ -25,7 +27,8 @@ public final class BookingRules {
     if (d.toMinutes() % 15 != 0 || start.getEpochSecond() % 900 != 0) {
       throw ApiException.badRequest("Start and duration must be in 15 minute steps.");
     }
-    if (start.isBefore(now)) throw ApiException.badRequest("This time is in the past. Pick a later time.");
+    if (start.isBefore(now))
+      throw ApiException.badRequest("This time is in the past. Pick a later time.");
     if (start.isAfter(now.plus(Duration.ofDays(MAX_DAYS_AHEAD)))) {
       throw ApiException.badRequest("Bookings can be made up to 90 days ahead.");
     }

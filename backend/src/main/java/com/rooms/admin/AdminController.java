@@ -5,7 +5,6 @@ import com.rooms.booking.BookingDtos.BookingView;
 import com.rooms.booking.BookingRepository;
 import com.rooms.booking.BookingService;
 import com.rooms.booking.BookingStatus;
-import com.rooms.room.Room;
 import com.rooms.room.RoomRepository;
 import java.time.Clock;
 import java.time.Duration;
@@ -25,7 +24,8 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
   public record PageView<T>(List<T> items, int page, int size, long total) {}
 
-  public record Utilization(UUID roomId, String roomName, double bookedHours, double openHours, double percent) {}
+  public record Utilization(
+      UUID roomId, String roomName, double bookedHours, double openHours, double percent) {}
 
   private final BookingRepository bookings;
   private final BookingService service;
@@ -46,8 +46,11 @@ public class AdminController {
       @RequestParam(required = false) BookingStatus status,
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "20") int size) {
-    Page<Booking> p = bookings.adminList(status, PageRequest.of(Math.max(0, page), Math.min(100, Math.max(1, size))));
-    return new PageView<>(service.views(p.getContent()), p.getNumber(), p.getSize(), p.getTotalElements());
+    Page<Booking> p =
+        bookings.adminList(
+            status, PageRequest.of(Math.max(0, page), Math.min(100, Math.max(1, size))));
+    return new PageView<>(
+        service.views(p.getContent()), p.getNumber(), p.getSize(), p.getTotalElements());
   }
 
   @GetMapping("/utilization")
@@ -71,10 +74,15 @@ public class AdminController {
     return rooms.findByActiveTrueOrderByNameAsc().stream()
         .map(
             r -> {
-              double open = days * Duration.between(r.getOpenTime(), r.getCloseTime()).toMinutes() / 60.0;
+              double open =
+                  days * Duration.between(r.getOpenTime(), r.getCloseTime()).toMinutes() / 60.0;
               double b = booked.getOrDefault(r.getId(), 0.0);
               return new Utilization(
-                  r.getId(), r.getName(), round(b), round(open), open == 0 ? 0 : round(b / open * 100));
+                  r.getId(),
+                  r.getName(),
+                  round(b),
+                  round(open),
+                  open == 0 ? 0 : round(b / open * 100));
             })
         .toList();
   }

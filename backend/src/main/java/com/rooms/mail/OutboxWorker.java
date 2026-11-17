@@ -21,7 +21,11 @@ public class OutboxWorker {
   public static final int MAX_ATTEMPTS = 5;
   private static final Logger log = LoggerFactory.getLogger(OutboxWorker.class);
   private static final List<Duration> BACKOFF =
-      List.of(Duration.ofMinutes(1), Duration.ofMinutes(5), Duration.ofMinutes(30), Duration.ofHours(2));
+      List.of(
+          Duration.ofMinutes(1),
+          Duration.ofMinutes(5),
+          Duration.ofMinutes(30),
+          Duration.ofHours(2));
 
   private final EmailOutboxRepository repo;
   private final JavaMailSender sender;
@@ -95,7 +99,8 @@ public class OutboxWorker {
     h.setTo(row.getRecipientEmail());
     h.setSubject(r.subject());
     h.setText(r.text(), r.html());
-    if (row.getType() != EmailType.BOOKING_REMINDER && row.getType() != EmailType.BOOKING_RELEASED) {
+    if (row.getType() != EmailType.BOOKING_REMINDER
+        && row.getType() != EmailType.BOOKING_RELEASED) {
       String ics = IcsBuilder.build(row.getType(), p, props.mailFrom());
       h.addAttachment(
           "invite.ics",

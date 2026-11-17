@@ -93,7 +93,8 @@ public abstract class AbstractIT {
   /** The next Monday to Friday at least {@code daysAhead} days out, at the given hour in IST. */
   protected static Instant slot(int daysAhead, int hour, int minute) {
     LocalDate d = LocalDate.now(ZoneId.of("Asia/Kolkata")).plusDays(daysAhead);
-    while (d.getDayOfWeek() == DayOfWeek.SATURDAY || d.getDayOfWeek() == DayOfWeek.SUNDAY) d = d.plusDays(1);
+    while (d.getDayOfWeek() == DayOfWeek.SATURDAY || d.getDayOfWeek() == DayOfWeek.SUNDAY)
+      d = d.plusDays(1);
     return d.atTime(hour, minute).atZone(ZoneId.of("Asia/Kolkata")).toInstant();
   }
 

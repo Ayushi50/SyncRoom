@@ -52,7 +52,12 @@ public class AvailabilityService {
 
   @Transactional(readOnly = true)
   public SearchResult search(
-      LocalDate date, LocalTime start, LocalTime end, int people, Set<Amenity> amenities, UUID userId) {
+      LocalDate date,
+      LocalTime start,
+      LocalTime end,
+      int people,
+      Set<Amenity> amenities,
+      UUID userId) {
     Instant from = date.atTime(start).atZone(OfficeTime.ZONE).toInstant();
     Instant to = date.atTime(end).atZone(OfficeTime.ZONE).toInstant();
     BookingRules.validateWindow(from, to, clock.instant());
@@ -77,7 +82,8 @@ public class AvailabilityService {
 
   /** Next free slots of the same length, used when a booking conflicts. */
   @Transactional(readOnly = true)
-  public List<Suggestion> alternatives(Instant from, Instant to, int people, UUID userId, int limit) {
+  public List<Suggestion> alternatives(
+      Instant from, Instant to, int people, UUID userId, int limit) {
     LocalDate date = from.atZone(OfficeTime.ZONE).toLocalDate();
     List<Room> candidates = candidates(people, Set.of());
     Map<UUID, List<Segment>> busy = busyByRoom(candidates, date, userId);
@@ -102,7 +108,8 @@ public class AvailabilityService {
             .collect(
                 Collectors.groupingBy(
                     Booking::getRoomId,
-                    Collectors.mapping(b -> new Segment(b.getStartsAt(), b.getEndsAt()), Collectors.toList())));
+                    Collectors.mapping(
+                        b -> new Segment(b.getStartsAt(), b.getEndsAt()), Collectors.toList())));
     Map<UUID, List<Segment>> merged = new java.util.HashMap<>();
     out.forEach((k, v) -> merged.put(k, new ArrayList<>(v)));
     for (SlotHold h : holds.findActiveOverlapping(ids, clock.instant(), dayStart, dayEnd)) {
@@ -116,12 +123,19 @@ public class AvailabilityService {
   }
 
   private List<Suggestion> suggest(
-      List<Room> candidates, Map<UUID, List<Segment>> busy, LocalDate date, Instant notBefore, Duration len, int limit) {
+      List<Room> candidates,
+      Map<UUID, List<Segment>> busy,
+      LocalDate date,
+      Instant notBefore,
+      Duration len,
+      int limit) {
     Instant now = clock.instant();
     List<Suggestion> out = new ArrayList<>();
     for (Room r : candidates) {
-      Instant slot = earliest(r, busy.getOrDefault(r.getId(), List.of()), date, notBefore, len, now);
-      if (slot == null) slot = earliest(r, busy.getOrDefault(r.getId(), List.of()), date, Instant.MIN, len, now);
+      Instant slot =
+          earliest(r, busy.getOrDefault(r.getId(), List.of()), date, notBefore, len, now);
+      if (slot == null)
+        slot = earliest(r, busy.getOrDefault(r.getId(), List.of()), date, Instant.MIN, len, now);
       if (slot != null) out.add(new Suggestion(RoomView.of(r), slot, slot.plus(len)));
     }
     out.sort(Comparator.comparing(Suggestion::startsAt).thenComparingInt(s -> s.room().capacity()));

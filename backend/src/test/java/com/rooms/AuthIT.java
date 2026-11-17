@@ -19,7 +19,10 @@ class AuthIT extends AbstractIT {
   @Test
   void registerReturnsTokenAndHttpOnlyRefreshCookie() throws Exception {
     MvcResult r =
-        mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER))
+        mvc.perform(
+                post("/api/auth/register")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(REGISTER))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.accessToken").isNotEmpty())
             .andExpect(jsonPath("$.user.role").value("EMPLOYEE"))
@@ -30,8 +33,10 @@ class AuthIT extends AbstractIT {
 
   @Test
   void duplicateEmailIsAConflict() throws Exception {
-    mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER));
-    mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER))
+    mvc.perform(
+        post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER));
+    mvc.perform(
+            post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER))
         .andExpect(status().isConflict())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_PROBLEM_JSON));
   }
@@ -59,7 +64,10 @@ class AuthIT extends AbstractIT {
   @Test
   void refreshRotatesTokenAndOldOneStopsWorking() throws Exception {
     MvcResult reg =
-        mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER))
+        mvc.perform(
+                post("/api/auth/register")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(REGISTER))
             .andReturn();
     Cookie first = reg.getResponse().getCookie("refresh_token");
     MvcResult second =
@@ -76,7 +84,10 @@ class AuthIT extends AbstractIT {
   @Test
   void logoutRevokesRefreshToken() throws Exception {
     MvcResult reg =
-        mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(REGISTER))
+        mvc.perform(
+                post("/api/auth/register")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(REGISTER))
             .andReturn();
     Cookie c = reg.getResponse().getCookie("refresh_token");
     mvc.perform(post("/api/auth/logout").cookie(c)).andExpect(status().isNoContent());
@@ -102,9 +113,7 @@ class AuthIT extends AbstractIT {
     String t = login("asha@example.com", Role.EMPLOYEE);
     mvc.perform(auth(get("/api/admin/bookings"), t)).andExpect(status().isForbidden());
     mvc.perform(auth(get("/api/admin/utilization"), t)).andExpect(status().isForbidden());
-    mvc.perform(
-            auth(post("/api/rooms"), t)
-                .content("{\"name\":\"X\",\"floor\":1,\"capacity\":4}"))
+    mvc.perform(auth(post("/api/rooms"), t).content("{\"name\":\"X\",\"floor\":1,\"capacity\":4}"))
         .andExpect(status().isForbidden());
   }
 
@@ -113,12 +122,12 @@ class AuthIT extends AbstractIT {
     String t = login("boss@example.com", Role.ADMIN);
     mvc.perform(
             auth(post("/api/rooms"), t)
-                .content("{\"name\":\"Sabarmati\",\"floor\":4,\"capacity\":6,\"amenities\":[\"PROJECTOR\"]}"))
+                .content(
+                    "{\"name\":\"Sabarmati\",\"floor\":4,\"capacity\":6,\"amenities\":[\"PROJECTOR\"]}"))
         .andExpect(status().isCreated());
     mvc.perform(auth(get("/api/admin/utilization"), t)).andExpect(status().isOk());
     mvc.perform(auth(delete("/api/rooms/" + small.getId()), t)).andExpect(status().isNoContent());
-    mvc.perform(auth(get("/api/rooms"), t))
-        .andExpect(jsonPath("$[?(@.name=='Kaveri')]").isEmpty());
+    mvc.perform(auth(get("/api/rooms"), t)).andExpect(jsonPath("$[?(@.name=='Kaveri')]").isEmpty());
   }
 
   @Test

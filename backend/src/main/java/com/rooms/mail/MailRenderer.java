@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
@@ -36,7 +36,10 @@ public class MailRenderer {
     ZonedDateTime start = Instant.parse(p.startsAt()).atZone(zone);
     ZonedDateTime end = Instant.parse(p.endsAt()).atZone(zone);
     String day = start.format(DateTimeFormatter.ofPattern("EEE d MMM", Locale.ENGLISH));
-    boolean sameHalf = start.format(DateTimeFormatter.ofPattern("a")).equals(end.format(DateTimeFormatter.ofPattern("a")));
+    boolean sameHalf =
+        start
+            .format(DateTimeFormatter.ofPattern("a"))
+            .equals(end.format(DateTimeFormatter.ofPattern("a")));
     String startPart =
         start.format(DateTimeFormatter.ofPattern(sameHalf ? "h:mm" : "h:mm a", Locale.ENGLISH));
     String endPart = end.format(DateTimeFormatter.ofPattern("h:mm a z", Locale.ENGLISH));
@@ -49,9 +52,11 @@ public class MailRenderer {
     c.setVariable("when", when);
     c.setVariable("heading", heading(type));
     c.setVariable("viewUrl", p.baseUrl() + "/bookings/" + p.bookingId());
-    c.setVariable("rescheduleUrl", p.baseUrl() + "/bookings/" + p.bookingId() + "?action=reschedule");
+    c.setVariable(
+        "rescheduleUrl", p.baseUrl() + "/bookings/" + p.bookingId() + "?action=reschedule");
     c.setVariable("cancelUrl", p.baseUrl() + "/bookings/" + p.bookingId() + "?action=cancel");
-    c.setVariable("equipment", String.join(", ", p.equipment().stream().map(MailRenderer::pretty).toList()));
+    c.setVariable(
+        "equipment", String.join(", ", p.equipment().stream().map(MailRenderer::pretty).toList()));
     return new Rendered(subject, html.process("booking", c), text.process("booking", c));
   }
 

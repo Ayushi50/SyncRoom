@@ -51,7 +51,10 @@ public class AuthService {
     User u =
         users.save(
             new User(
-                r.name().trim(), r.email().trim().toLowerCase(), encoder.encode(r.password()), Role.EMPLOYEE));
+                r.name().trim(),
+                r.email().trim().toLowerCase(),
+                encoder.encode(r.password()),
+                Role.EMPLOYEE));
     return open(u);
   }
 
@@ -70,7 +73,8 @@ public class AuthService {
   @Transactional
   public Session refresh(String token) {
     if (token == null || token.isBlank()) throw invalidRefresh();
-    RefreshToken rt = refreshTokens.findByTokenHash(hash(token)).orElseThrow(AuthService::invalidRefresh);
+    RefreshToken rt =
+        refreshTokens.findByTokenHash(hash(token)).orElseThrow(AuthService::invalidRefresh);
     if (rt.isRevoked() || rt.getExpiresAt().isBefore(clock.instant())) throw invalidRefresh();
     rt.revoke();
     User u = users.findById(rt.getUserId()).orElseThrow(AuthService::invalidRefresh);
@@ -104,7 +108,8 @@ public class AuthService {
   static String hash(String token) {
     try {
       return HexFormat.of()
-          .formatHex(MessageDigest.getInstance("SHA-256").digest(token.getBytes(StandardCharsets.UTF_8)));
+          .formatHex(
+              MessageDigest.getInstance("SHA-256").digest(token.getBytes(StandardCharsets.UTF_8)));
     } catch (java.security.NoSuchAlgorithmException e) {
       throw new IllegalStateException(e);
     }

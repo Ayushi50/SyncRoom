@@ -63,9 +63,19 @@ public class SecurityConfig {
         .exceptionHandling(
             e ->
                 e.authenticationEntryPoint(
-                        (req, res, ex) -> writeProblem(res, HttpStatus.UNAUTHORIZED, "Sign in required", "Sign in to continue."))
+                        (req, res, ex) ->
+                            writeProblem(
+                                res,
+                                HttpStatus.UNAUTHORIZED,
+                                "Sign in required",
+                                "Sign in to continue."))
                     .accessDeniedHandler(
-                        (req, res, ex) -> writeProblem(res, HttpStatus.FORBIDDEN, "Forbidden", "You do not have access to this resource.")))
+                        (req, res, ex) ->
+                            writeProblem(
+                                res,
+                                HttpStatus.FORBIDDEN,
+                                "Forbidden",
+                                "You do not have access to this resource.")))
         .addFilterBefore(new JwtAuthFilter(jwt), UsernamePasswordAuthenticationFilter.class);
     return http.build();
   }

@@ -33,7 +33,12 @@ public class Booking {
   protected Booking() {}
 
   public Booking(
-      UUID roomId, UUID organizerId, String title, Instant startsAt, Instant endsAt, UUID seriesId) {
+      UUID roomId,
+      UUID organizerId,
+      String title,
+      Instant startsAt,
+      Instant endsAt,
+      UUID seriesId) {
     this.id = UUID.randomUUID();
     this.roomId = roomId;
     this.organizerId = organizerId;

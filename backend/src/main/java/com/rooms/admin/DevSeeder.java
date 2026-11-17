@@ -38,15 +38,22 @@ public class DevSeeder implements ApplicationRunner {
       room("Brahmaputra", 3, 16, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL);
     }
     if (!users.existsByEmailIgnoreCase("admin@rooms.local")) {
-      users.save(new User("Admin", "admin@rooms.local", encoder.encode("admin-dev-pass"), Role.ADMIN));
+      users.save(
+          new User("Admin", "admin@rooms.local", encoder.encode("admin-dev-pass"), Role.ADMIN));
     }
     if (!users.existsByEmailIgnoreCase("employee@rooms.local")) {
-      users.save(new User("Employee", "employee@rooms.local", encoder.encode("employee-dev-pass"), Role.EMPLOYEE));
+      users.save(
+          new User(
+              "Employee",
+              "employee@rooms.local",
+              encoder.encode("employee-dev-pass"),
+              Role.EMPLOYEE));
     }
   }
 
   private void room(String name, int floor, int cap, boolean checkIn, Amenity... a) {
-    Set<Amenity> set = a.length == 0 ? EnumSet.noneOf(Amenity.class) : EnumSet.copyOf(java.util.List.of(a));
+    Set<Amenity> set =
+        a.length == 0 ? EnumSet.noneOf(Amenity.class) : EnumSet.copyOf(java.util.List.of(a));
     Room r = new Room(name, floor, cap, set);
     r.setCheckInRequired(checkIn);
     rooms.save(r);

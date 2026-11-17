@@ -24,7 +24,10 @@ public class OutboxService {
   private final RoomsProperties props;
 
   public OutboxService(
-      EmailOutboxRepository outbox, UserRepository users, ObjectMapper mapper, RoomsProperties props) {
+      EmailOutboxRepository outbox,
+      UserRepository users,
+      ObjectMapper mapper,
+      RoomsProperties props) {
     this.outbox = outbox;
     this.users = users;
     this.mapper = mapper;
@@ -39,7 +42,8 @@ public class OutboxService {
     if (type != EmailType.BOOKING_RELEASED) {
       for (BookingAttendee a : b.getAttendees()) {
         recipients.putIfAbsent(
-            a.getEmail().toLowerCase(), a.getName() == null || a.getName().isBlank() ? a.getEmail() : a.getName());
+            a.getEmail().toLowerCase(),
+            a.getName() == null || a.getName().isBlank() ? a.getEmail() : a.getName());
       }
     }
     List<MailPayload.Person> invitees =
@@ -49,10 +53,7 @@ public class OutboxService {
     recipients.forEach(
         (email, name) -> {
           String zone =
-              users
-                  .findByEmailIgnoreCase(email)
-                  .map(User::getTimeZone)
-                  .orElse("Asia/Kolkata");
+              users.findByEmailIgnoreCase(email).map(User::getTimeZone).orElse("Asia/Kolkata");
           MailPayload p =
               new MailPayload(
                   b.getId(),
