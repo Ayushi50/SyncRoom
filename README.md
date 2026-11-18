@@ -13,7 +13,7 @@ flowchart LR
 
 ## Run it locally
 
-You need Java 21 or newer, Node 20 or newer and PostgreSQL 16. No containers are used.
+You need Java 21 or newer, Node 22 or newer and PostgreSQL 16. No containers are used.
 
 ```bash
 # 1. database (once). On macOS: brew install postgresql@16 && brew services start postgresql@16

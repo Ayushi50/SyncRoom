@@ -3,7 +3,7 @@
 The build makes one jar that serves both the API and the web app, so there is one service, one address and no CORS.
 
 ```bash
-./build.sh                    # needs Node 20+ and Java 21+, writes backend/target/rooms-0.1.0.jar
+./build.sh                    # needs Node 22+ and Java 21+, writes backend/target/rooms-0.1.0.jar
 java -jar backend/target/rooms-0.1.0.jar
 ```
 
