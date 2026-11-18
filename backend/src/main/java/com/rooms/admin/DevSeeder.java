@@ -30,12 +30,12 @@ public class DevSeeder implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) {
     if (rooms.count() == 0) {
-      room("Kaveri", 2, 4, false);
-      room("Ganga", 2, 8, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL, Amenity.WHITEBOARD);
-      room("Narmada", 1, 12, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL, Amenity.ACCESSIBLE);
-      room("Godavari", 3, 6, false, Amenity.VIDEO_CALL, Amenity.WHITEBOARD);
-      room("Yamuna", 2, 2, false);
-      room("Brahmaputra", 3, 16, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL);
+      room("Maple", 2, 4, false);
+      room("Cedar", 2, 8, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL, Amenity.WHITEBOARD);
+      room("Pinehurst", 1, 12, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL, Amenity.ACCESSIBLE);
+      room("Birch", 3, 6, false, Amenity.VIDEO_CALL, Amenity.WHITEBOARD);
+      room("Willow", 2, 2, false);
+      room("Redwood", 3, 16, true, Amenity.PROJECTOR, Amenity.VIDEO_CALL);
     }
     if (!users.existsByEmailIgnoreCase("admin@rooms.local")) {
       users.save(
