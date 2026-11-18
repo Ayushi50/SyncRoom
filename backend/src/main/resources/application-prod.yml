@@ -1,0 +1,10 @@
+rooms:
+  seed: false
+  cookie-secure: true
+springdoc:
+  api-docs.enabled: false
+  swagger-ui.enabled: false
+spring:
+  mail.properties.mail.smtp:
+    auth: ${SMTP_AUTH:true}
+    starttls.enable: ${SMTP_STARTTLS:true}

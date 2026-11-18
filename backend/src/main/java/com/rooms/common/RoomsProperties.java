@@ -9,4 +9,7 @@ public record RoomsProperties(
     String appBaseUrl,
     String mailFrom,
     boolean seed,
-    boolean cookieSecure) {}
+    boolean cookieSecure,
+    String adminEmail,
+    String adminPassword,
+    String adminName) {}

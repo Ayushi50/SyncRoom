@@ -58,8 +58,10 @@ public class SecurityConfig {
                     .permitAll()
                     .requestMatchers("/api/admin/**")
                     .hasRole("ADMIN")
+                    .requestMatchers("/api/**")
+                    .authenticated()
                     .anyRequest()
-                    .authenticated())
+                    .permitAll())
         .exceptionHandling(
             e ->
                 e.authenticationEntryPoint(

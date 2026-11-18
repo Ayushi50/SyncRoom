@@ -7,3 +7,4 @@ dist/
 rooms-mockups.zip
 frontend/test-results/
 frontend/playwright-report/
+backend/src/main/resources/static/
