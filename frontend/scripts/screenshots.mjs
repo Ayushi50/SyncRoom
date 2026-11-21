@@ -2,7 +2,7 @@
 import { chromium } from '@playwright/test';
 
 const base = process.env.BASE_URL ?? 'http://localhost:5173';
-const out = new URL('../../docs/screenshots/', import.meta.url).pathname;
+const out = new URL('../../screenshots/', import.meta.url).pathname;
 const browser = await chromium.launch();
 let failed = false;
 

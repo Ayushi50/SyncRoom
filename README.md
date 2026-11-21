@@ -51,17 +51,17 @@ Configuration comes from environment variables, see `.env.example`. The database
 cd backend && ./mvnw verify          # tests, jacoco report, spotless check
 cd frontend && npm run lint && npm test && npm run build
 cd frontend && npm run e2e           # needs backend, frontend and the mail catcher running
-cd frontend && node scripts/screenshots.mjs   # refreshes docs/screenshots
+cd frontend && node scripts/screenshots.mjs   # refreshes screenshots/
 ```
 
 Backend tests use a real PostgreSQL (`rooms_test`) so the overlap exclusion constraint is exercised, and GreenMail for email.
 
-## Docs
+## Screenshots
 
-- [API summary](docs/API.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Decisions](docs/DECISIONS.md)
-- [Progress](docs/PROGRESS.md)
-- [Morning report](docs/MORNING_REPORT.md)
+| | |
+|---|---|
+| ![Landing](screenshots/landing-1280.png) | ![Finder](screenshots/finder-1280.png) |
+| ![Reference 1](screenshots/reference-1.png) | ![Reference 2](screenshots/reference-2.png) |
+| ![Reference 3](screenshots/reference-3.png) | ![Reference 4](screenshots/reference-4.png) |
 
 `design/mockups/` holds the HTML design references. They are not shipped.
