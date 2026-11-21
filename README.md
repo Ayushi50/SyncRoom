@@ -61,7 +61,5 @@ Backend tests use a real PostgreSQL (`rooms_test`) so the overlap exclusion cons
 | | |
 |---|---|
 | ![Landing](screenshots/landing-1280.png) | ![Finder](screenshots/finder-1280.png) |
-| ![Reference 1](screenshots/reference-1.png) | ![Reference 2](screenshots/reference-2.png) |
-| ![Reference 3](screenshots/reference-3.png) | ![Reference 4](screenshots/reference-4.png) |
 
 `design/mockups/` holds the HTML design references. They are not shipped.
