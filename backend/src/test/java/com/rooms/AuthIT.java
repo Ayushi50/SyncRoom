@@ -127,7 +127,7 @@ class AuthIT extends AbstractIT {
         .andExpect(status().isCreated());
     mvc.perform(auth(get("/api/admin/utilization"), t)).andExpect(status().isOk());
     mvc.perform(auth(delete("/api/rooms/" + small.getId()), t)).andExpect(status().isNoContent());
-    mvc.perform(auth(get("/api/rooms"), t)).andExpect(jsonPath("$[?(@.name=='Kaveri')]").isEmpty());
+    mvc.perform(auth(get("/api/rooms"), t)).andExpect(jsonPath("$[?(@.name=='Maple')]").isEmpty());
   }
 
   @Test

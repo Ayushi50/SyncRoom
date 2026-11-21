@@ -49,17 +49,17 @@ class BookingIT extends AbstractIT {
   void searchFiltersByCapacityAndSortsBestFitFirst() throws Exception {
     String t = login("a@example.com", Role.EMPLOYEE);
     Instant s = slot(3, 10, 0);
-    assertThat(names(searchJson(t, s, 3, null))).containsExactly("Kaveri", "Ganga", "Narmada");
-    assertThat(names(searchJson(t, s, 6, null))).containsExactly("Ganga", "Narmada");
-    assertThat(names(searchJson(t, s, 10, null))).containsExactly("Narmada");
+    assertThat(names(searchJson(t, s, 3, null))).containsExactly("Maple", "Cedar", "Pinehurst");
+    assertThat(names(searchJson(t, s, 6, null))).containsExactly("Cedar", "Pinehurst");
+    assertThat(names(searchJson(t, s, 10, null))).containsExactly("Pinehurst");
   }
 
   @Test
   void searchFiltersByEquipment() throws Exception {
     String t = login("a@example.com", Role.EMPLOYEE);
     Instant s = slot(3, 10, 0);
-    assertThat(names(searchJson(t, s, 2, "PROJECTOR,VIDEO_CALL"))).containsExactly("Narmada");
-    assertThat(names(searchJson(t, s, 2, "WHITEBOARD"))).containsExactly("Kaveri");
+    assertThat(names(searchJson(t, s, 2, "PROJECTOR,VIDEO_CALL"))).containsExactly("Pinehurst");
+    assertThat(names(searchJson(t, s, 2, "WHITEBOARD"))).containsExactly("Maple");
   }
 
   @Test
@@ -71,10 +71,10 @@ class BookingIT extends AbstractIT {
                 .content(bookingJson(small, s, s.plus(Duration.ofHours(1)), null)))
         .andExpect(status().isCreated());
     JsonNode res = searchJson(t, s, 2, null);
-    assertThat(names(res)).containsExactly("Ganga", "Narmada");
+    assertThat(names(res)).containsExactly("Cedar", "Pinehurst");
     // the day availability bar for a free room still reports the other bookings of that day
     Instant overlapping = s.plus(Duration.ofMinutes(30));
-    assertThat(names(searchJson(t, overlapping, 2, null))).doesNotContain("Kaveri");
+    assertThat(names(searchJson(t, overlapping, 2, null))).doesNotContain("Maple");
   }
 
   @Test

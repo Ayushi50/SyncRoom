@@ -54,7 +54,7 @@ class EmailIT extends AbstractIT {
             .sorted()
             .toList();
     assertThat(to).containsExactly("org@example.com", "x@example.com", "y@example.com");
-    assertThat(msgs[0].getSubject()).startsWith("Booked: Planning, Narmada, ");
+    assertThat(msgs[0].getSubject()).startsWith("Booked: Planning, Pinehurst, ");
   }
 
   @Test
@@ -180,7 +180,7 @@ class EmailIT extends AbstractIT {
         UUID.fromString("11111111-1111-1111-1111-111111111111"),
         2,
         "Sprint planning",
-        "Narmada",
+        "Pinehurst",
         1,
         12,
         List.of("PROJECTOR", "VIDEO_CALL"),
@@ -204,16 +204,16 @@ class EmailIT extends AbstractIT {
       assertThat(r.subject())
           .startsWith(
               type.subjectPrefix()
-                  + ": Sprint planning, Narmada, Wed 18 Nov, 10:00 to 11:00 AM IST");
+                  + ": Sprint planning, Pinehurst, Wed 18 Nov, 10:00 to 11:00 AM IST");
       assertThat(r.html())
           .contains("Sprint planning")
-          .contains("Narmada")
+          .contains("Pinehurst")
           .contains("#0f766e")
           .contains("View booking")
           .contains("max-width:560px");
       assertThat(r.text())
           .contains("Sprint planning")
-          .contains("Room: Narmada, floor 1")
+          .contains("Room: Pinehurst, floor 1")
           .contains("View booking: http://localhost:5173/bookings/");
       assertThat(r.subject()).doesNotContain(" - ");
     }

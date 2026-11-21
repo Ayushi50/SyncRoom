@@ -252,7 +252,7 @@ export function Landing() {
               <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(240px,1fr))]">
                 <PreviewCard
                   best
-                  name="Godavari"
+                  name="Birch"
                   sub="6 seats on floor 3"
                   tags={['Video call', 'Whiteboard']}
                   busy={[
@@ -261,7 +261,7 @@ export function Landing() {
                   ]}
                 />
                 <PreviewCard
-                  name="Ganga"
+                  name="Cedar"
                   sub="8 seats on floor 2"
                   tags={['Video call', 'Projector']}
                   busy={[
@@ -270,7 +270,7 @@ export function Landing() {
                   ]}
                 />
                 <PreviewCard
-                  name="Narmada"
+                  name="Pinehurst"
                   sub="12 seats on floor 1"
                   tags={['Video call', 'Accessible']}
                   busy={[[77, 22]]}

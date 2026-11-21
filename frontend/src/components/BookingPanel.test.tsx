@@ -6,7 +6,7 @@ import type { Hold, Room } from '../lib/types';
 
 const room: Room = {
   id: 'r1',
-  name: 'Godavari',
+  name: 'Birch',
   floor: 3,
   capacity: 3,
   amenities: ['VIDEO_CALL'],
@@ -50,7 +50,7 @@ describe('parseInvitees', () => {
 describe('BookingPanel', () => {
   it('shows the room, the time in the user zone and the hold countdown', () => {
     setup();
-    expect(screen.getByText('Godavari')).toBeInTheDocument();
+    expect(screen.getByText('Birch')).toBeInTheDocument();
     expect(screen.getByText(/Wed 18 Nov, 10:00 to 11:00 AM/)).toBeInTheDocument();
     expect(screen.getByRole('timer')).toHaveTextContent(/Held for you for [45]:\d\d/);
   });
@@ -107,7 +107,7 @@ describe('BookingPanel', () => {
 
   it('shows what failed and offers nearby alternatives on a conflict', async () => {
     const alt = {
-      room: { ...room, id: 'r2', name: 'Ganga' },
+      room: { ...room, id: 'r2', name: 'Cedar' },
       startsAt: '2026-11-18T06:30:00Z',
       endsAt: '2026-11-18T07:30:00Z',
     };
@@ -126,7 +126,7 @@ describe('BookingPanel', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Confirm booking' }));
     expect(await screen.findByRole('alert')).toHaveTextContent('Time slot taken');
     await userEvent.click(
-      screen.getByRole('button', { name: /Ganga, Wed 18 Nov, 12:00 to 1:00 PM/ }),
+      screen.getByRole('button', { name: /Cedar, Wed 18 Nov, 12:00 to 1:00 PM/ }),
     );
     expect(props.onPickAlternative).toHaveBeenCalledWith(alt);
   });

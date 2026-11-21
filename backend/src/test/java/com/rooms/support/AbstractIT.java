@@ -57,9 +57,9 @@ public abstract class AbstractIT {
     jdbc.execute(
         "truncate email_outbox, slot_holds, booking_attendees, bookings, booking_series, room_amenities, rooms, refresh_tokens, users cascade");
     limiter.reset();
-    small = rooms.save(new Room("Kaveri", 2, 4, EnumSet.of(Amenity.WHITEBOARD)));
-    big = rooms.save(new Room("Narmada", 1, 12, EnumSet.of(Amenity.PROJECTOR, Amenity.VIDEO_CALL)));
-    Room c = new Room("Ganga", 2, 8, EnumSet.of(Amenity.PROJECTOR));
+    small = rooms.save(new Room("Maple", 2, 4, EnumSet.of(Amenity.WHITEBOARD)));
+    big = rooms.save(new Room("Pinehurst", 1, 12, EnumSet.of(Amenity.PROJECTOR, Amenity.VIDEO_CALL)));
+    Room c = new Room("Cedar", 2, 8, EnumSet.of(Amenity.PROJECTOR));
     c.setCheckInRequired(true);
     checkIn = rooms.save(c);
     mail.reset();

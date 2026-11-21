@@ -29,10 +29,10 @@ test('register, search, book, see it listed and receive the email', async ({ pag
   const cards = page.getByRole('article');
   await expect(cards.first()).toBeVisible();
   await expect(cards.first().getByText('Best fit')).toBeVisible();
-  // 5 people: Kaveri (4 seats) must not appear, Godavari (6) is the best fit.
-  await expect(page.getByRole('article', { name: 'Kaveri' })).toHaveCount(0);
+  // 5 people: Maple (4 seats) must not appear, Birch (6) is the best fit.
+  await expect(page.getByRole('article', { name: 'Maple' })).toHaveCount(0);
   const best = (await cards.first().getByRole('heading').textContent()) ?? '';
-  expect(['Godavari', 'Ganga', 'Narmada', 'Brahmaputra']).toContain(best);
+  expect(['Birch', 'Cedar', 'Pinehurst', 'Redwood']).toContain(best);
 
   await page.getByRole('button', { name: `Select ${best}` }).click();
   await expect(page.getByRole('complementary', { name: 'Your booking' })).toBeVisible();
