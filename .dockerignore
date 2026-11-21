@@ -1,0 +1,9 @@
+.git
+**/node_modules
+**/target
+frontend/dist
+frontend/test-results
+frontend/playwright-report
+backend/src/main/resources/static
+rooms-mockups.zip
+.env
